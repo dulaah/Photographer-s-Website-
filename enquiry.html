@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <!-- Font Awesome -->
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Malcolm Lismore Photography</title>
+ <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      padding: 15px 20px;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 0;
+      display: flex;
+      gap: 15px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+    }
+
+    section.enquiry {
+      padding: 30px;
+    }
+
+    form {
+      max-width: 600px;
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+
+    input, select, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Malcolm Lismore Photography</h1>
+    <nav>
+      <ul>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="enquiry.php" class="active">Enquiry</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="enquiry" class="enquiry">
+    <h2>Enquiry Form</h2>
+    <p>Interested in booking a session? Fill out the form below and we will get back to you shortly.</p>
+    <form id="enquiryForm" method="POST" action="submit_enquiry.php">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" placeholder="Your Full Name" required />
+
+      <label for="email">Your Email</label>
+      <input type="email" id="email" name="email" placeholder="Your Email Address" required />
+
+      <label for="phone">Your Phone Number</label>
+      <input type="text" id="phone" name="phone" placeholder="Your Contact Number" required />
+
+      <label for="location">Event Location</label>
+      <input type="text" id="location" name="location" placeholder="Where is the event?" required />
+
+      <label for="eventDate">Event Date</label>
+      <input type="date" id="eventDate" name="eventDate" required />
+
+      <label for="package">Choice Package</label>
+      <select id="package" name="package" required>
+        <option value="">-- Select a Package --</option>
+        <option value="Landscape Photography">Landscape Photography</option>
+        <option value="Wildlife Photography">Wildlife Photography</option>
+        <option value="Event Photography">Event Photography</option>
+        <option value="Custom Portraits">Custom Portraits</option>
+        
+      </select>
+
+      <label for="message">Additional Details</label>
+      <textarea id="message" name="message" rows="5" placeholder="Please provide any additional information" required></textarea>
+
+      <button type="submit">Submit Enquiry</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Malcolm Lismore Photography. All rights reserved.</p>
+    <div class="contact-details">
+        <p>Contact Us:</p>
+        <p>Email: <a href="mailto:info@malcolmlismorephoto.com">info@malcolmlismorephoto.com</a></p>
+        <p>Phone: +44 123 456 789</p>
+        <p>Address: 123 Photography St, Edinburgh, Scotland</p>
+    </div>
+    <div class="social-media">
+        <p>Follow Us:</p>
+        <a href="https://www.facebook.com" target="_blank" class="social-icon"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.instagram.com" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.twitter.com" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.linkedin.com" target="_blank" class="social-icon"><i class="fab fa-linkedin"></i></a>
+    </div>
+</footer>
+
+  <script>
+    const packageInfo = {
+      "Landscape Photography": {
+        description: "Capture scenic views and natural beauty. Ideal for outdoor lovers.",
+        price: "$200",
+        image: "images/pietro-de-grandi-T7K4aEPoGGk-unsplash - Copy.jpg"
+      },
+      "Wildlife Photography": {
+        description: "Photograph animals in their natural habitat with expert precision.",
+        price: "$300",
+        image: "images/birger-strahl-cusbuH6PdTM-unsplash.jpg"
+      },
+      "Event Photography": {
+        description: "Perfect for birthdays, corporate events, and celebrations.",
+        price: "$250",
+        image: "images/ben-o-bro-SV7YxAOP4GQ-unsplash.jpg"
+      },
+      "Custom Portraits": {
+        description: "Personalized portraits for individuals, families, or creative ideas.",
+        price: "$180",
+        image: "images/pexels-bianeyre-1751167.jpg"
+      },
+      
+    };
+
+    document.getElementById("enquiryForm").addEventListener("submit", function (e) {
+      e.preventDefault(); // Stop the form from submitting immediately
+
+      const selectedPackage = document.getElementById("package").value;
+
+      if (!packageInfo[selectedPackage]) {
+        alert("Please select a valid package.");
+        return;
+      }
+
+      const width = 600;
+      const height = 600;
+      const left = (window.screen.width / 2) - (width / 2);
+      const top = (window.screen.height / 2) - (height / 2);
+
+      const win = window.open("", "PackageDetails", `width=${width},height=${height},left=${left},top=${top}`);
+
+      win.document.write(`
+        <html>
+        <head>
+          <title>Package Details</title>
+          <style>
+            body { font-family: Arial; padding: 20px; }
+            img { width: 100%; height: auto; border-radius: 10px; }
+            .details { margin-top: 15px; }
+            button {
+              margin-top: 20px;
+              padding: 10px 20px;
+              background-color: #333;
+              color: white;
+              border: none;
+              cursor: pointer;
+              font-size: 16px;
+              border-radius: 5px;
+            }
+            button:hover {
+              background-color: #555;
+            }
+          </style>
+        </head>
+        <body>
+          <h2>${selectedPackage}</h2>
+          <img src="${packageInfo[selectedPackage].image}" alt="${selectedPackage}" />
+          <div class="details">
+            <p><strong>Description:</strong> ${packageInfo[selectedPackage].description}</p>
+            <p><strong>Price:</strong> ${packageInfo[selectedPackage].price}</p>
+          </div>
+          <button onclick="window.opener.document.getElementById('enquiryForm').submit(); window.close();">Confirm & Submit</button>
+        </body>
+        </html>
+      `);
+      win.document.close();
+    });
+  </script>
+  
+</body>
+
+
+</html>

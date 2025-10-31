@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<form action="signup.php" method="POST">
+
+    <div class="signup-container">
+        <h2>Create an Account</h2>
+        <form action="/submit-signup" method="POST">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="Gender">Gender</label>
+                <input type="text" id="Gender" name="gen" required>
+            </div>
+            <div class="form-group">
+                <label for="Contry">Contry</label>
+                <input type="text" id="Contry" name="Con" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+            </div>
+            <button type="submit" class="btn">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="signin.html">Login here</a></p>
+    </div>
+    <?php
+// Include database connection
+include('db_connect.php');
+
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get form data
+    $username = $_POST['username'];
+    $gender = $_POST['gen'];
+    $country = $_POST['Con'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirm-password'];
+
+    // Validate password match
+    if ($password !== $confirm_password) {
+        echo "<div class='message error'>Passwords do not match.</div>";
+        exit();
+    }
+
+    // Hash the password for security
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+    // Prepare SQL query to insert data into the database
+    $sql = "INSERT INTO users (username, gender, country, email, password) 
+            VALUES ('$username', '$gender', '$country', '$email', '$hashed_password')";
+
+    // Execute the query and check for success
+    if ($conn->query($sql) === TRUE) {
+        echo "<div class='message success'>Account created successfully.</div>";
+    } else {
+        echo "<div class='message error'>Error: " . $conn->error . "</div>";
+    }
+
+    // Close the database connection
+    $conn->close();
+    // Close the database connection
+}
+?>
+
+
+</body>
+</html>
