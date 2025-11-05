@@ -60,7 +60,7 @@ The website consists of the following pages:
 
 The file `db_connect.php` handles the database connection for enquiry form submissions.
 
-Example snippet:
+Example snippet;
 ```php
 <?php
 $conn = mysqli_connect("localhost", "root", "", "malcolm_photography");
