@@ -44,7 +44,7 @@ The website consists of the following pages:
 
 ---
 
-## ⚙️ Technologies Used
+## Technologies Used
 
 | Category | Tools / Languages |
 |-----------|------------------|
@@ -56,7 +56,7 @@ The website consists of the following pages:
 
 ---
 
-## 🗄️ Database Connection
+## Database Connection
 
 The file `db_connect.php` handles the database connection for enquiry form submissions.
 
